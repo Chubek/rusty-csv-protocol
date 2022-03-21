@@ -16,15 +16,31 @@ pub fn decode_str(tbd: &str) -> String {
 
 
 
-pub fn get_size(body: String) -> usize{
+pub fn get_size(body: String) -> i32{
     let re_match = Regex::new("SET \\d+").unwrap();
     let re_digit = Regex::new("\\d+").unwrap();
 
     if re_match.is_match(body.as_str().clone()) {
         let all_found = re_digit.find(body.as_str().clone()).unwrap();
 
-        return all_found.as_str().parse::<usize>().unwrap()
+        return all_found.as_str().parse::<i32>().unwrap()
     }
 
-    return 0usize
+    return -1
+}
+
+pub fn select_substr(tbs: &String, len: i32) -> String {
+    let mut fin = String::new();
+
+    let mut characters = tbs.chars();
+
+    for _ in 0..len {
+        if let Some(c) = characters.next() {
+            fin.push(c)
+        }
+        
+    }
+
+
+    return fin
 }
